@@ -167,7 +167,7 @@ def PrintBookingDetails():
   Results=[]
   for row in rv: #Format the Output Results and add to return string////////windowDir, bed,accessory,imageUrl,bookingStatus, rlevel
     Result={}
-    Result['checkin_date']=row[0].replace('\n',' ')
+    Result['checkin_date']=row[0]
     Result['checkout_date']=row[1]
     Result['custID']=row[2]
     Result['roomID']=row[3]
