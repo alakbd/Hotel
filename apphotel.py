@@ -148,7 +148,16 @@ def bookingEntryV():
   s3='''insert into reservationTbl ( checkin_date, checkout_date, custID, roomID ) VALUES('{}','{}','{}','{}');'''.format(checkin_date, checkout_date, Result, roomID)
   cur3.execute(s3)
   mysql.connection.commit()
-  return '{"Result":Result}'
+  
+  
+   response={'Results':Result, 'count':1}
+   ret=app.response_class(
+   response=json.dumps(response),
+   status=200,
+   mimetype='application/json'
+ return ret
+
+
 
 
 
