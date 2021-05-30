@@ -158,8 +158,34 @@ def bookingEntryV():
   )
   return ret
 
-
-
+@app.route("/PrintBookingDetails") #Add Customer
+def PrintBookingDetails():
+  custID = request.args.get('custID')
+  cur4 = mysql.connection.cursor() #create a connection to the SQL instance
+  cur4.execute('''select checkin_date, checkout_date, a.custID, roomID,revID ,custName,phone,address,idtype,idnumber,email from reservationTbl a,custTbl b  where a.custID={ } and b.custID={};'''.format(custID,custID) # execute an SQL statment
+  rv4 = cur4.fetchall() #Retreive all rows returend by the SQL statment
+  Results2=[]
+  for row in rv4: #Format the Output Results and add to return string////////windowDir, bed,accessory,imageUrl,bookingStatus, rlevel
+    Result2={}
+    Result2['checkin_date']=row[0].replace('\n',' ')
+    Result2['checkout_date]=row[1]
+    Result2['custID']=row[2]
+    Result2['roomID']=row[3]
+    Result2['revID']=row[4]
+    Result2['custName']=row[5]
+    Result2['phone'] = row[6]
+    Result2['address'] = row[7]
+    Result2['idtype']=row[5]
+    Result2['idnumber'] = row[6]
+    Result2['email'] = row[7]
+    Results2.append(Result2)
+  response={'Results':Results2, 'count':len(Results2)}
+  ret=app.response_class(
+    response=json.dumps(response),
+    status=200,
+    mimetype='application/json'
+  )
+  return ret #Return the data in a string format
 
 
 if __name__ == "__main__":
