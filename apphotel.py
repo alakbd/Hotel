@@ -77,6 +77,8 @@ def bookingPage(): # Name of the method
 
 @app.route("/AvailableRooms") #Default - Show Data
 def AvailableRooms(): # Name of the method
+  chk_in = request.args.get('chk_in')
+  chk_out = request.args.get('chk_out')
   no_of_bed = request.args.get('rooms')
   cur = mysql.connection.cursor()  #create a connection to the SQL instance
   cur.execute("SELECT * FROM roomTbl where bed="+no_of_bed+" and bookingStatus=0;") # execute an SQL statment
