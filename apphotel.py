@@ -158,37 +158,7 @@ def bookingEntryV():
   )
   return ret
 
-@app.route("/PrintBookingDetails") #Add Customer
-def PrintBookingDetails():
-  chk_in=request.args.get('chk_in')
-  chk_out=request.args.get('chk_out')
-  no_of_bed = request.args.get('rooms')
-  
-  cur = mysql.connection.cursor() #create a connection to the SQL instance
-  sqlRequest = 'SELECT * from roomTbl WHERE bed = %s and roomID NOT IN(select roomID from reservationTbl where (checkin_date BETWEEN  %s AND %s) or (checkout_date BETWEEN %s AND %s)'
-  cur.execute(sqlRequest,no_of_bed, chk_in, chk_out, chk_in, chk_out)
-  rv = cur.fetchall() #Retreive all rows returend by the SQL statment
-  Results=[]
-  for row in rv: #Format the Output Results and add to return string////////windowDir, bed,accessory,imageUrl,bookingStatus, rlevel
-    Result={}
-    Result['windowDir']=row[0].replace('\n',' ')
-    Result['bed']=row[1]
-    Result['accessory']=row[2]
-    Result['imageUrl']=row[3]
-    Result['bookingStatus']=row[4]
-    Result['rlevel']=row[5]
-    Result['price'] = row[6]
-    Result['roomID'] = row[7]
-    Results.append(Result)
-  response={'Results':Results, 'count':len(Results)}
-  ret=app.response_class(
-    response=json.dumps(response),
-    status=200,
-    mimetype='application/json'
-  )
-  return ret #Return the data in a string format
-  
- 
+
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0',port='8080', ssl_context=('cert.pem', 'privkey.pem')) #Run the flask app at port 8080
