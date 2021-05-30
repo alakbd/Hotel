@@ -160,18 +160,25 @@ def bookingEntryV():
 
 @app.route("/PrintBookingDetails") #Add Customer
 def PrintBookingDetails():
-  custID = request.args.get('custID')
-  cur = mysql.connection.cursor()  #create a connection to the SQL instance
-  cur.execute("select * from reservationTbl where custID="+custID+";") # execute an SQL statment
+  chk_in=request.args.get('chk_in')
+  chk_out=request.args.get('chk_out')
+  no_of_bed = request.args.get('rooms')
+  
+  cur = mysql.connection.cursor() #create a connection to the SQL instance
+  sqlRequest = 'SELECT * from roomTbl WHERE bed = %s and roomID NOT IN(select roomID from reservationTbl where (checkin_date BETWEEN  %s AND %s) or (checkout_date BETWEEN %s AND %s)'
+  cur.execute(sqlRequest,no_of_bed, chk_in, chk_out, chk_in, chk_out)
   rv = cur.fetchall() #Retreive all rows returend by the SQL statment
   Results=[]
   for row in rv: #Format the Output Results and add to return string////////windowDir, bed,accessory,imageUrl,bookingStatus, rlevel
     Result={}
-    Result['checkin_date']=row[0]
-    Result['checkout_date']=row[1]
-    Result['custID']=row[2]
-    Result['roomID']=row[3]
-    Result['revID']=row[4]
+    Result['windowDir']=row[0].replace('\n',' ')
+    Result['bed']=row[1]
+    Result['accessory']=row[2]
+    Result['imageUrl']=row[3]
+    Result['bookingStatus']=row[4]
+    Result['rlevel']=row[5]
+    Result['price'] = row[6]
+    Result['roomID'] = row[7]
     Results.append(Result)
   response={'Results':Results, 'count':len(Results)}
   ret=app.response_class(
