@@ -162,7 +162,7 @@ def bookingEntryV():
 def PrintBookingDetails():
   custID = int(request.args.get('custID'))
   cur = mysql.connection.cursor()  #create a connection to the SQL instance
-  cur.execute("select checkin_date, checkout_date, a.custID, roomID,revID ,custName,phone,address,idtype,idnumber,email from reservationTbl a,custTbl b  where a.custID="+custID+" and b.custID="+custID;") # execute an SQL statment
+   cur.execute("select checkin_date, checkout_date, a.custID, roomID,revID ,custName,phone,address,idtype,idnumber,email from reservationTbl a,custTbl b  where a.custID="+custID+" and b.custID="+custID+";") # execute an SQL statment
   rv = cur.fetchall() #Retreive all rows returend by the SQL statment
   Results=[]
   for row in rv: #Format the Output Results and add to return string////////windowDir, bed,accessory,imageUrl,bookingStatus, rlevel
