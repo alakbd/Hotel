@@ -1,33 +1,339 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>Test API Client</title>
-<script>
-let doIt=()=>{
-  let tab=document.getElementById("tab1");
-  let rows=tab1.getElementsByTagName('tr');
-  fetch('https://alak.dbsprojects.ie:8080/')
-    .then(response => response.json())
-    .then(data=>data.Results.forEach(  //.slice(0,3)
-      x=>{
-        let newRow=rows[0].cloneNode(true);
-        let divs=newRow.getElementsByTagName('td');
-        divs[0].innerHTML=x['ID'];
-        divs[1].innerHTML=x['Name'];
-        divs[2].innerHTML=x['Email'];
-        tab1.appendChild(newRow);
-      }
-    )
-  );
-}
-</script>
-</head>
-<body>
-<button onClick="doIt()">Press me</button>
-This is where the results turn up: <br/>
-<table id='tab1' bgcolor='blue'>
-<tr><td>ID</td><td>Name</td><td>Email</td></tr>
-</table></body>
+﻿<!DOCTYPE html>
+		
+
+        <head>
+            <title>Website</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <link rel="stylesheet" type="text/css" href="http://irelandawamileague.com/College-Project/css/project.css">
+
+            <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+            <script type="text/javascript" src="js/jquery.min.js"></script>
+            <script>
+             
+                function myFunctionAvailibility() {
+                    var e = document.getElementById("room");
+
+                    var selectedroom = e.options[e.selectedIndex].text;//get the selected option text
+                    var day1 = new Date($('#checkinID').val());
+                    var day2 = new Date($('#checkoutID').val());
+                    if (day1 != '' || date2 != '') {
+                        var difference = day2.getTime() - day1.getTime();
+                        if (difference < 0) {
+                            alert("Must select check-in Date before check-out date");
+                        }
+                        else {
+                            window.location.href = "/AvailableRooms.html?chk_in=" + $('#checkinID').val() + "&chk_out=" + $('#checkoutID').val() + "&rooms=" + selectedroom;
+                        }
+                    }
+                   
+                    
+                   
+                }
+                function valid_datefunction() {
+                    if (document.getElementById("checkinID").value != '') {
+                        var day1 = new Date($('#checkinID').val());
+                        var day2 = new Date($('#checkoutID').val());
+                        var difference = day2.getTime() - day1.getTime();
+                        if (difference < 0) {
+                            alert("Must select check-in Date before check-out date");
+
+                        }
+                    }
+                    else
+                    {
+                         alert("Must Enter check-in Date before check-out date");
+                    }
+                    
+                }
+
+
+            </script>
+
+        </head>
+
+
+				
+				
+
+		<body>
+			<div class="header" id="myHeader">
+
+				<div class="navbar" id="mynavbar" style="text-align:left">
+
+					<h1>The Falcon Hotel</h1>
+					<a href="index.html" class="active">Home</a>
+					<a href="http://irelandawamileague.com/College-Project/AboutUs.html">About Us</a>
+					<a href="http://irelandawamileague.com/College-Project/ContactUs.html">Contact Us</a>
+
+					<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+						<i class="fa fa-bars"></i>
+					</a>
+				</div>
+			</div>
+			<div class="content">
+					<div id="wrapper">
+
+						<main>
+							
+
+							<div class="slideshow-container">
+
+							
+
+								<div class="mySlides fade">
+									<img src="http://irelandawamileague.com/College-Project/slideshow-home/bed.jpg" style="width:100%">
+
+								</div>
+
+								<div class="mySlides fade">
+									<img src="http://irelandawamileague.com/College-Project/slideshow-home/Index.jpg" style="width:100%">
+
+								</div>
+
+							</div>
+
+
+							<br>
+
+							<div style="text-align:center">
+								<span class="dot"></span>
+								<span class="dot"></span>
+								<span class="dot"></span>
+							</div>
+
+
+
+							<script>
+								var slideIndex = 0;
+								showSlides();
+
+								function showSlides() {
+									var i;
+									var slides = document.getElementsByClassName("mySlides");
+									var dots = document.getElementsByClassName("dot");
+									for (i = 0; i < slides.length; i++) {
+										slides[i].style.display = "none";
+									}
+									slideIndex++;
+									if (slideIndex > slides.length) { slideIndex = 1 }
+									for (i = 0; i < dots.length; i++) {
+										dots[i].className = dots[i].className.replace(" active", "");
+									}
+									slides[slideIndex - 1].style.display = "block";
+									dots[slideIndex - 1].className += " active";
+									setTimeout(showSlides, 2000); // Change image every 2 seconds
+								}
+							</script>
+
+
+
+
+
+							<div id="box">
+								<div class="box-column-right">
+
+									<div style="background-color:darkgrey; text-align:center;"><h3>Check Availability</h3></div>
+                               
+                                        <div style="background-color:#c4c0c0; padding-left:20px; padding-top:20px; padding-bottom:20px;">
+                                            <label for="CheckIn">Check In : </label>
+                                            <input type="date" name="CheckIn" id="checkinID" onchange="valid_setdatefunction()" style="width: 216px; height: auto;" autofocus>
+                                            <script>
+                                                checkinID.value = '';
+                                                checkinID.min = new Date().toISOString().split("T")[0];
+                                            </script>
+                                            <label for="CheckOut">Check Out:</label>
+                                            <input type="date" name="CheckOut" id="checkoutID" onchange="valid_datefunction()" style="width: 216px; height: auto;" autofocus>
+                                            <script>
+                                                checkoutID.value = '';
+                                                var date2 = new Date();
+                                                date2.setDate(date2.getDate() + 1);
+                                                checkoutID.min = date2.toISOString().split("T")[0];
+
+                                                //$("#datepicker_xxx").datepicker("getDate")
+                                            </script>
+
+                                            <label for="room">Room: </label>
+
+                                            <select id="room" style="width: 160px; height: auto;">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>
+                                            <br /><br /><br /><br />
+
+                                            <button onclick="myFunctionAvailibility()">Check Availability</button>
+
+                                        </div>
+                                   
+									
+								</div>
+
+								<div class="box-content">
+									<div class="gallery">
+
+										<img class="myImg" src="http://irelandawamileague.com/College-Project/images/2019-certificate-of-excellence.png" alt="Exellence awards achieved in 2019" style="width:100%;max-width:250px;  height:200px;">
+
+										<img class="myImg" src="http://irelandawamileague.com/College-Project/images/2017-certificate-of-excellence.png" alt="Exellence awards achieved in 2017" style="width:100%;max-width:250px;  height:200px;">
+									</div>
+
+									<div class="space"></div>
+									<h3> Hotel Description</h3>
+									<p>
+											<p>Falcon Hotel on the west coast of Ireland
+											in Galway city, near National University of Galway, St. Nicholas Collegiate Church and Eyre Square, Falcon hotel features free WiFi,free 24 hour wireless broadband Internet access and free private off street carpark and all our prices are including the tax in rate. </p>
+
+											
+
+											<p>Our House Guest Accommodation can enjoy a full breakfast.</p>
+											<p>Eyre Square Shopping Centre, two sandy beaches, spectacular
+											coastal walks, a variety of restaurants within walking distance, friendly traditional Irish music pubs, horse-riding, golfing, fishing, and a variety of water sports . Bikes are available for hire too.
+
+											Popular points of interest near the accommodation include Galway Greyhound Stadium, Galway Cathedral and Galway Eyre Square Shopping Center. The nearest airport is Shannon Airport, 80 km from Falcon Hotel.
+
+											This is our guests' favourite part of Galway, according to independent reviews.
+
+											Couples particularly like the location — they rated it 9.7 for a two-person trip.
+
+											We speak your language!</p>
+									</p>
+								</div>
+
+							</div><!--box-->
+
+
+
+
+							<div class="space"></div>
+
+
+							<div id="box">
+								<div class="box-img">
+									<img class="img" src="http://irelandawamileague.com/College-Project/images/image-8.jpg">
+								</div>
+
+								<div class="box-content">
+									<h3>Why Stay In Our Hotel</h3>
+									<p>Welcome to our website – and to bed & breakfast luxury, Dublin-style. Have a look around, and see how we can make your visit to our city memorable and comfortable.</p>
+									<h3>Stay right here</h3>
+									<p> If you like what we do and how we do it, click through to bookings or call us. We guarantee you’ll get the best rate when you book directly.</p>
+
+									<h3>Our Rooms</h3>
+									<p>All our guestrooms are luxuriously furnished, non-smoking, own private bathrooms with full size baths, separate walk-in tropical rain showers, walnut wooden floors, central heating, iron and ironing board, hair dryer, all the rooms equipped with 32" to 40" flat T.V. and tea/coffee making facilities. Guests can enjoy a garden too.</p>
+								</div>
+
+							</div><!--box-->
+
+							<div id="box">
+								<div class="box-img">
+									<img class="img" src="http://irelandawamileague.com/College-Project/images/Booking.jpg">
+								</div>
+								<div class="box-content">
+									<h3>Stay close to everything</h3>
+									<p>
+										Overlooking the Guinness Brewery, beside the Phoenix Park, near Dublin Zoo, adjacent to Heuston Station, a stone’s throw from the Collins Barracks Museum, on the Luas (tram) line, well served by public buses and tour buses and just 2km from O’Connell Bridge, the
+										Falcon Hotel is the perfect starting point for whatever brings you to Dublin.
+									</p>
+									<h3>What awaits you</h3>
+									<p>
+										226 very comfortable bedrooms, Chesterfields Restaurant, Iveagh Bar, 10 meeting rooms, Conference facilities for up to 200 delegates and Sheep, throughout the hotel.
+										While we’re very proud of our many awards and all four of our stars, we rather measure our success by the rave guest reviews and the numbers who return time and time again.
+									</p>
+								</div>
+							</div><!--box-->
+
+
+							<div id="box">
+								<div class="box-img">
+									<img class="img" src="http://irelandawamileague.com/College-Project/images/conference-1.jpg">
+								</div>
+								<div class="box-content">
+									<h3>Make it a meeting of minds</h3>
+									<p>Whatever the meeting, conference, presentation, workshop or interview, you’ll find the Ashling Hotel an agreeable choice.<p>
+
+									<p>If you’re the event organiser, you’ll be delighted – a selection of 10 comfortable rooms, a dedicated team on hand to make sure that everything runs smoothly, state-of-the-art AV equipment, refreshments, stationery, various dining options and the Iveagh Bar to wind down after a busy day.</p>
+
+									<p>If you’re in charge of finance, you’ll be pleased too – the Ashling represents excellent value for money. Plus, if delegates are staying over, we can discuss a group discount.</p>
+
+									<p>All that… and easy to access. 15 minutes from Dublin Airport, a short drive from the M50,on the Luas line and next door to one of the city’s main InterCity railway stations.</p>
+								</div>
+							</div> <!--box-->
+
+
+
+						</main>
+
+					</div>
+				</div>
+
+
+
+				<footer>
+					<!-- Footer Section Begin -->
+					<footer class="footer-section">
+						<div class="container">
+							<div class="footer-text">
+								<div class="row">
+									<div class="col-lg-4">
+										<div class="ft-about">
+											<div class="fa-social">
+												<a href="#"><i class="fa fa-facebook"></i></a>
+												<a href="#"><i class="fa fa-twitter"></i></a>
+												<a href="#"><i class="fa fa-tripadvisor"></i></a>
+												<a href="#"><i class="fa fa-instagram"></i></a>
+												<a href="#"><i class="fa fa-youtube-play"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3 offset-lg-1">
+										<div class="ft-contact">
+											<h6>Contact Us</h6>
+											<ul>
+												<li>(353) 91 724166</li>
+												<li>info.falconhotel@gmail.com</li>
+												<li>Rahon Road 52 Rosan Glas, Galway, Ireland</li>
+											</ul>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</footer>
+					<!-- Footer Section End -->
+
+
+			
+
+				<script>
+					function myFunction() {
+						var nav = document.getElementById("mynavbar");
+						if (nav.className === "navbar") {
+							nav.className += " responsive";
+						} else {
+							nav.className = "navbar";
+						}
+					}
+				</script>
+
+				<!--sticky header w3 school-->
+				<script>
+					window.onscroll = function () { myFunctionToggleMenu() };
+
+					var header = document.getElementById("myHeader");
+					var sticky = header.offsetTop;
+
+					function myFunctionToggleMenu() {
+						if (window.pageYOffset > sticky) {
+							header.classList.add("sticky");
+						} else {
+							header.classList.remove("sticky");
+						}
+					}
+				</script>
+</body>
 </html>
