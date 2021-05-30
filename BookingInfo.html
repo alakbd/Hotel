@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>About Us-Falcon</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/project.css">
+    <script type="text/javascript" src="js\BookingRegistartion_Test.js"></script>
+    <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+
+    <script>
+                function SelectRowFunction() {
+
+
+                    var uname = document.getElementById("username").value;
+                    var inputno = document.getElementById("phone").value;
+                    var addr = document.getElementById("address").value;;
+                    var a = document.getElementById("pdt");
+                    var idtype = a.options[a.selectedIndex].text;
+                    var idnumber = document.getElementById("idnumber").value;
+                    var email = document.getElementById("email").value;
+                    var c = document.getElementById("sex");
+                    var sex = c.options[c.selectedIndex].text;
+                    var comment = document.getElementById("desc").value;
+
+                    if (uname == '' || inputno == '' || addr == '' || idtype == '' || idnumber == '' || sex == '') {
+                        alert("Please insert all the required fields");
+                    }
+                    else {
+
+                         
+                          
+
+                            var chk_in = document.getElementById("checkinID").value;
+                            var chk_out =document.getElementById("checkoutID").value;
+                            var roomID = document.getElementById("roomID").value;
+                        
+
+                        var d = "https://alak.dbsprojects.ie:8080/bookingEntryV?name=" + uname + "&phone=" + inputno + "&address=" + addr
+                            + "&idtype=" + idtype + "&idnumber=" + idnumber + "&email=" + email + "&sex=" + sex + "&comment=" + comment
+                            + "&checkin_date=" + chk_in + "&checkout_date=" + chk_out + "&roomID=" + roomID;
+                        var res = encodeURI(d);
+                        
+                          $.post(res,
+                                        {
+                                            //name: uname,
+                                            //email: email,
+                                            //phone:inputno,
+                                            //address: addr,
+                                            //idtype: idtype
+                                        },
+                              function (data, status) {
+                                 
+                                  //var custID;
+                                  //var chars = data.split(':');
+                                  //chars = data;
+                                  //var replaced2 = chars.replace(/:/g, " ");
+                                 var chars = data.split(':');
+                                 var replaced = chars[1].replace(/}/g, "");
+                                  var replaced2 = replaced.replace(/ /g, "");
+                                  window.location.href = "/PrintBookingDetails.html?custID=" + replaced2+"&name=" + uname + "&phone=" + inputno + "&address=" + addr
+                            + "&idtype=" + idtype + "&idnumber=" + idnumber + "&email=" + email + "&sex=" + sex + "&comment=" + comment
+                            + "&checkin_date=" + chk_in + "&checkout_date=" + chk_out + "&roomID=" + roomID;
+                                  
+                                   });
+
+                        
+                      
+
+
+                    }
+
+
+        }
+    </script>
+    <script>
+
+                 let doIt = () => {
+                    var urlParams = new URLSearchParams(window.location.search);
+
+                     var a = urlParams.get('roomID');
+                     document.getElementById('roomID').value = a;
+                     var b = urlParams.get('chk_in');
+                     document.getElementById('checkinID').value = b;
+                     var c = urlParams.get('chk_out');
+                     document.getElementById('checkoutID').value = c;
+
+
+
+                }
+    </script>
+
+</head>
+
+<body onload="doIt()">
+
+    <div class="header" id="myHeader">
+
+        <div class="navbar" id="mynavbar" style="text-align:left">
+
+            <h1>The Falcon Hotel</h1>
+            <a href="index.html">Home</a>
+            <a href="AboutUs.html" class="active">About Us</a>
+            <a href="ContactUs.html">Contact Us</a>
+
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+    <div class="content">
+        <div id="wrapper">
+
+            <!----------------------------------------source for validation----------------------------------------------------------------
+            validation from   : https://www.w3resource.com/javascript/form/javascript-sample-registration-form-validation.php-->
+
+
+            <main>
+
+
+
+                <div class="gallery">
+
+                    <img class="myImg-2" src="images/image-1.jpg" alt="Room-Price €60" style="width:100%;max-width:206px;  height:200px;">
+
+                    <img class="myImg-2" src="images/image-2.jpg" alt="Room-Price €90" style="width:100%;max-width:206px;  height:200px;">
+
+                    <img class="myImg-2" src="images/image-3.jpg" alt="Luxury Suit €260" style="width:100%;max-width:206px;  height:200px;">
+                    <img class="myImg-2" src="images/image-4.jpg" alt="Luxury Suit €240" style="width:100%;max-width:206px;  height:200px;">
+                    <img class="myImg-2" src="images/image-5.jpg" alt="Double-Suit €150" style="width:100%;max-width:215px;  height:200px;">
+                </div>
+
+                <div style="text-align:center"><h3>booking info</h3></div>
+
+
+
+                <table style="border-collapse: collapse; width: 100%; height: 252px; background-color:beige; font:16px">
+                    <tbody>
+                        <tr style="height: 18px;">
+                            <td style="width: 19.839%; height: 18px;  text-align:right">Room ID</td>
+                            <td style="width: 2.22543%; height: 18px;">:</td>
+                            <td style="width: 77.9355%; height: 18px;"> <input type="text" id="roomID" name="roomID" readonly></td>
+                        </tr>
+                        <tr style="height: 18px;">
+                            <td style="width: 19.839%; height: 18px;  text-align:right">checkin-Date</td>
+                            <td style="width: 2.22543%; height: 18px;">:</td>
+                            <td style="width: 77.9355%; height: 18px;"><input type="text" id="checkinID" name="checkinID" readonly></td>
+                        </tr>
+                        <tr style="height: 18px;">
+                            <td style="width: 19.839%; height: 18px;  text-align:right">checkout-Date</td>
+                            <td style="width: 2.22543%; height: 18px;">:</td>
+                            <td style="width: 77.9355%; height: 18px;"><input type="text" id="checkoutID" name="checkoutID" readonly></td>>
+                        </tr>
+                        <tr style="height: 18px;">
+                            <td style="width: 19.839%; height: 18px;  text-align:right">Name</td>
+                            <td style="width: 2.22543%; height: 18px;">:</td>
+                            <td style="width: 77.9355%; height: 18px;"><input type="text" name="username" id="username" size="50" onBlur="username_validation();" /><span id="name_err"></span></td>
+                        </tr>
+                        <tr style="height: 18px;">
+                            <td style="width: 19.839%; height: 18px;  text-align:right">Phone</td>
+                            <td style="width: 2.22543%; height: 18px;">:</td>
+                            <td style="width: 77.9355%; height: 18px;"><input type='text' name='phone' id="phone" size="50" onBlur="phonenumber_validation();" /><span id="phone_err"></span></td>
+                        </tr>
+                        <tr style="height: 18px;">
+                            <td style="width: 19.839%; height: 18px;  text-align:right">Address(Full)</td>
+                            <td style="width: 2.22543%; height: 18px;">:</td>
+                            <td style="width: 77.9355%; height: 18px;"><input type="text" name="address" id="address" size="50" onBlur="address_validation()" /><span id="add_err"></span></td>
+                        </tr>
+                        <tr style="height: 18px;">
+                            <td style="width: 19.839%; height: 18px;  text-align:right">ID Type</td>
+                            <td style="width: 2.22543%; height: 18px;">:</td>
+                            <td style="width: 77.9355%; height: 18px;">
+                                <select id="pdt" name="pdt" onBlur="personaliDT_validation();">
+                                    <option value="PS">Passport</option>00
+                                    <option value="NID">National ID</option>
+                                    <option value="DL">Driving License</option>0
+                                    <option value="GC">Green Card</option>
+                                    <option value="EC">Euro Card</option>
+                                </select><span id="pdt_err"></span>
+                            </td>
+                        </tr>
+                        <tr style="height: 18px;">
+                            <td style="width: 19.839%; height: 18px;  text-align:right">ID Number</td>
+                            <td style="width: 2.22543%; height: 18px;">:</td>
+                            <td style="width: 77.9355%; height: 18px;"><input type="text" name="idnumber" id="idnumber" size="50" onBlur="IDnumber_validation();" /><span id="IDnumber_err"></span></td>
+                        </tr>
+
+                        <tr style="height: 18px;">
+                            <td style="width: 19.839%; height: 18px;  text-align:right">Email</td>
+                            <td style="width: 2.22543%; height: 18px;">:</td>
+                            <td style="width: 77.9355%; height: 18px;"><input type="text" name="email" id="email" size="50" onBlur="email_validation();" /><span id="email_err"></span></td>
+                        </tr>
+                        <tr style="height: 18px;">
+                            <td style="width: 19.839%; height: 18px;  text-align:right">Gender</td>
+                            <td style="width: 2.22543%; height: 18px;">:</td>
+                            <td style="width: 77.9355%; height: 18px;">
+                                <select id="sex" name="sex" onBlur="sex_validation();">
+                                    <option value="ML">Male</option>
+                                    <option value="FL">Female</option>
+                                    <option value="OT">Other</option>
+
+                                </select><span id="sex_err"></span>
+                            </td>
+                        </tr>
+                        <tr style="height: 18px;">
+                            <td style="width: 19.839%; height: 18px;  text-align:right">Comment</td>
+                            <td style="width: 2.22543%; height: 18px;">:</td>
+                            <td style="width: 77.9355%; height: 18px;"><textarea name="desc" id="desc"></textarea></td>
+                        </tr>
+                        <tr style="height: 18px;">
+                            <td style="width: 19.839%; height: 18px;  text-align:right">&nbsp;</td>
+                            <td style="width: 2.22543%; height: 18px;"></td>
+                            <td style="width: 77.9355%; height: 18px;"><input id="submitBtn" type="button" value="Book" onclick="SelectRowFunction()" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+            </main>
+
+        </div>
+
+
+    </div>
+
+
+    <footer>
+        <!-- Footer Section Begin -->
+        <footer class="footer-section">
+            <div class="container">
+                <div class="footer-text">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="ft-about">
+                                <div class="fa-social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 offset-lg-1">
+                            <div class="ft-contact">
+                                <h6>Contact Us</h6>
+                                <ul>
+                                    <li>(353) 91 724166</li>
+                                    <li>info.falconhotel@gmail.com</li>
+                                    <li>Rahon Road 52 Rosan Glas, Galway, Ireland</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Footer Section End -->
+
+
+    </footer>
+
+
+
+    <!--sticky header-->
+    <script>
+					window.onscroll = function () { myFunctionToggleMenu() };
+
+					var header = document.getElementById("myHeader");
+					var sticky = header.offsetTop;
+
+					function myFunctionToggleMenu() {
+						if (window.pageYOffset > sticky) {
+							header.classList.add("sticky");
+						} else {
+							header.classList.remove("sticky");
+						}
+					}
+    </script>
+
+
+
+
+
+
+    <script>
+					// Get the modal
+					var modal = document.getElementById('myModal');
+
+					// Get the image and insert it inside the modal - use its "alt" text as a caption
+					var img = $('.myImg-2');
+					var modalImg = $("#img01");
+					var captionText = document.getElementById("caption");
+					$('.myImg-2').click(function () {
+						modal.style.display = "block";
+						var newSrc = this.src;
+						modalImg.attr('src', newSrc);
+						captionText.innerHTML = this.alt;
+					});
+
+					// Get the <span> element that closes the modal
+					var span = document.getElementsByClassName("close")[0];
+
+					// When the user clicks on <span> (x), close the modal
+					span.onclick = function () {
+						modal.style.display = "none";
+					}
+    </script>
+
+    <script>
+					function myFunction() {
+						var nav = document.getElementById("mynavbar");
+						if (nav.className === "navbar") {
+							nav.className += " responsive";
+						} else {
+							nav.className = "navbar";
+						}
+					}
+    </script>
+</body>
+</html>

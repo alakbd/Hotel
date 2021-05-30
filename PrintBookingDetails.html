@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+
+<head>
+    <style>
+        table {
+            width: auto;
+            font: 17px Calibri;
+        }
+
+        table, th, td {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+
+        img {
+            width: 50%;
+        }
+    </style>
+
+
+</head>
+<body>
+   
+
+    <p>
+        <input type="button" value="Print" onclick="myApp.printTable()" />
+    </p>
+
+
+
+    <p><br /><br /></p>
+    <p><br /><br /></p>
+    <table style="width: 80%; height: 180px;" id="tab1">
+        <tbody>
+            <tr style="height: 54px;">
+                <td style="width: 25%; height: 54px;">The Falcon Hotel</td>
+                <td style="width: 33.3333%; height: 54px;">&nbsp;</td>
+                
+                <td style="width: 42.827%; height: 54px;">(353) 91 724166 info.falconhotel@gmail.com Rahon Road 52 Rosan Glas, Galway, Ireland</td>
+            </tr>
+            <tr style="height: 54px; text-align:center;">
+                <td colspan="4">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</td>
+            </tr>
+            <tr style="height: 18px;">
+
+                <td style="width: 42.827%; height: 18px; text-align: right;">Room : &nbsp;</td>
+                <td style="width: 42.827%; height: 18px; text-align: left;">
+                    <label id="roomID"></label>
+                    <script>
+                        var urlParams = new URLSearchParams(window.location.search);
+
+                        document.getElementById('roomID').innerHTML = urlParams.get('roomID');
+                    </script>
+                </td>
+            </tr>
+            <tr style="height: 18px;">
+
+                <td style="width: 25%; height: 18px; text-align: right;">Check-In :&nbsp;&nbsp;</td>
+                <td style="width: 42.827%; height: 18px; text-align: left;">
+                    <label id="checkin_date"></label>
+                    <script>
+                        var urlParams = new URLSearchParams(window.location.search);
+
+                        document.getElementById('checkin_date').innerHTML = urlParams.get('checkin_date');
+                    </script>
+                </td>
+            </tr>
+            <tr style="height: 18px;">
+
+                <td style="width: 42.827%; height: 18px; text-align: right;">checkout : &nbsp;</td>
+                <td style="width: 42.827%; height: 18px; text-align: left;">
+                    <label id="checkout_date"></label>
+                    <script>
+                        var urlParams = new URLSearchParams(window.location.search);
+
+                        document.getElementById('checkout_date').innerHTML = urlParams.get('checkout_date');
+                    </script>
+                </td>
+            </tr>
+            <tr style="height: 18px;">
+
+                <td style="width: 25%; height: 18px; text-align: right;">Customer ID :&nbsp;&nbsp;</td>
+                <td style="width: 42.827%; height: 18px; text-align: left;">
+                    <label id="custID"></label>
+                    <script>
+                        var urlParams = new URLSearchParams(window.location.search);
+
+                        document.getElementById('custID').innerHTML = urlParams.get('custID');
+                    </script>
+                </td>
+            </tr>
+            <tr style="height: 18px;">
+
+                <td style="width: 25%; height: 18px; text-align: right;">Name :&nbsp;&nbsp;</td>
+                <td style="width: 42.827%; height: 18px; text-align: left;">
+                    <label id="custName"></label>
+                    <script>
+                        var urlParams = new URLSearchParams(window.location.search);
+
+                        document.getElementById('custName').innerHTML = urlParams.get('name');
+                    </script>
+                </td>
+            </tr>
+            <tr style="height: 18px;">
+
+                <td style="width: 42.827%; height: 18px; text-align: right;">Phone : &nbsp;</td>
+                <td style="width: 42.827%; height: 18px; text-align: left;">
+                    <label id="phone"></label>
+                    <script>
+                        var urlParams = new URLSearchParams(window.location.search);
+
+                        document.getElementById('phone').innerHTML = urlParams.get('phone');
+                    </script>
+                </td>
+            </tr>
+            <tr style="height: 18px;">
+
+                <td style="width: 25%; height: 18px; text-align: right;">Email :&nbsp;&nbsp;</td>
+                <td style="width: 42.827%; height: 18px; text-align: left;">
+                    <label id="email"></label>
+                    <script>
+                        var urlParams = new URLSearchParams(window.location.search);
+
+                        document.getElementById('email').innerHTML = urlParams.get('email');
+                    </script>
+                </td>
+            </tr>
+            <tr style="height: 18px;">
+
+                <td style="width: 25%; height: 18px; text-align: right;">Address :&nbsp;&nbsp;</td>
+                <td style="width: 42.827%; height: 18px; text-align: left;">
+                    <label id="address"></label>
+                    <script>
+                        var urlParams = new URLSearchParams(window.location.search);
+
+                        document.getElementById('address').innerHTML = urlParams.get('address');
+                    </script>
+                </td>
+            </tr>
+            <tr style="height: 18px;">
+
+                <td style="width: 25%; height: 18px; text-align: right;">ID :&nbsp;&nbsp;</td>
+                <td style="width: 42.827%; height: 18px; text-align: left;">
+                    <label id="idtype"></label>
+                    <script>
+                        var urlParams = new URLSearchParams(window.location.search);
+
+                        document.getElementById('idtype').innerHTML = urlParams.get('idtype');
+                    </script>
+                </td>
+            </tr>
+            <tr style="height: 18px;">
+
+                <td style="width: 25%; height: 18px; text-align: right;">ID Number :&nbsp;&nbsp;</td>
+                <td style="width: 42.827%; height: 18px; text-align: left;">
+                    <label id="idnumber"></label>
+                    <script>
+                        var urlParams = new URLSearchParams(window.location.search);
+
+                        document.getElementById('idnumber').innerHTML = urlParams.get('idnumber');
+                    </script>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <table>
+    </table>
+
+
+</body>
+
+
+<script>
+    var myApp = new function () {
+        this.printTable = function () {
+            var tab = document.getElementById('tab1');
+            var win = window.open('', '', 'height=700,width=700');
+            win.document.write(tab.outerHTML);
+            win.document.close();
+            win.print();
+        }
+    }
+</script>
+</html>

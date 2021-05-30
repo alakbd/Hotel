@@ -1,0 +1,424 @@
+﻿    <!DOCTYPE html>
+		<html>
+
+        <head>
+            <title>About Us-Falcon</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <link rel="stylesheet" type="text/css" href="css/project.css">
+            <link rel="stylesheet" href="css/Modal-Image.css">
+            <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+            <script type="text/javascript" src="js/jquery.min.js"></script>
+            <style>
+                #tab1 {
+                    font-family: Arial, Helvetica, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+
+                    #tab1 td, #tab1 th {
+                        border: 1px solid #ddd;
+                        padding: 8px;
+                        width: 250px;
+                    }
+
+                    #tab1 tr:nth-child(even) {
+                        background-color: #f2f2f2;
+                    }
+
+                .btn {
+                    cursor: pointer;
+                    width: auto;
+                }
+            </style>
+
+            <script>
+
+                function sortTable() {
+                    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+
+                    table = document.getElementById("tab1");
+                    switching = true;
+
+
+                    var e = document.getElementById("select_sort");
+                    dir = e.value;
+
+                    if (dir == "asc") {
+                        while (switching) {
+                            switching = false;
+                            rows = table.getElementsByTagName("TR");
+                            for (i = 1; i < (rows.length - 1); i++) {
+                                shouldSwitch = false;
+                                x = rows[i].getElementsByTagName("TD")[3];
+                                y = rows[i + 1].getElementsByTagName("TD")[3];
+                                var cmpX = isNaN(parseInt(x.innerHTML)) ? x.innerHTML.toLowerCase() : parseInt(x.innerHTML);
+                                var cmpY = isNaN(parseInt(y.innerHTML)) ? y.innerHTML.toLowerCase() : parseInt(y.innerHTML);
+                                cmpX = (cmpX == '-') ? 0 : cmpX;
+                                cmpY = (cmpY == '-') ? 0 : cmpY;
+                                if (dir == "asc") {
+                                    if (cmpX > cmpY) {
+                                        shouldSwitch = true;
+                                        break;
+                                    }
+                                } else if (dir == "desc") {
+                                    if (cmpX < cmpY) {
+                                        shouldSwitch = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (shouldSwitch) {
+                                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                switching = true;
+                                switchcount++;
+                            } else {
+                                if (switchcount == 0 && dir == "asc") {
+                                    dir = "desc";
+                                    switching = true;
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        dir = "asc";
+                        while (switching) {
+                            switching = false;
+                            rows = table.getElementsByTagName("TR");
+                            for (i = 1; i < (rows.length - 1); i++) {
+                                shouldSwitch = false;
+                                x = rows[i].getElementsByTagName("TD")[3];
+                                y = rows[i + 1].getElementsByTagName("TD")[3];
+                                var cmpX = isNaN(parseInt(x.innerHTML)) ? x.innerHTML.toLowerCase() : parseInt(x.innerHTML);
+                                var cmpY = isNaN(parseInt(y.innerHTML)) ? y.innerHTML.toLowerCase() : parseInt(y.innerHTML);
+                                cmpX = (cmpX == '-') ? 0 : cmpX;
+                                cmpY = (cmpY == '-') ? 0 : cmpY;
+                                if (dir == "asc") {
+                                    if (cmpX < cmpY) {
+                                        shouldSwitch = true;
+                                        break;
+                                    }
+                                } else if (dir == "desc") {
+                                    if (cmpX > cmpY) {
+                                        shouldSwitch = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (shouldSwitch) {
+                                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                switching = true;
+                                switchcount++;
+                            } else {
+                                if (switchcount == 0 && dir == "asc") {
+                                    dir = "desc";
+                                    switching = true;
+                                }
+                            }
+                        }
+                    }
+
+                }
+            </script>
+
+            <script>
+                function SelectRowFunction() {
+                    var table = document.getElementById('tab1');
+                    var cells = table.getElementsByTagName('td');
+
+                    for (var i = 0; i < cells.length; i++) {
+                        // Take each cell
+                        var cell = cells[i];
+                        // do something on onclick event for cell
+
+                        cell.onclick = function () {
+                            // Get the row id where the cell exists
+                            var rowId = this.parentNode.rowIndex;
+
+                            var rowsNotSelected = table.getElementsByTagName('tr');
+                            for (var row = 0; row < rowsNotSelected.length; row++) {
+                                rowsNotSelected[row].style.backgroundColor = "";
+                                rowsNotSelected[row].classList.remove('selected');
+                            }
+                            var rowSelected = table.getElementsByTagName('tr')[rowId];
+                            rowSelected.style.backgroundColor = "yellow";
+                            rowSelected.className += " selected";
+
+                            msg = 'The ID of the company is: ' + rowSelected.cells[0].innerHTML;
+                            msg += '\nThe cell value is: ' + this.innerHTML;
+                            //alert(msg);
+
+                            var urlParams = new URLSearchParams(window.location.search);
+                            var b = urlParams.get('chk_in');
+                            var chk_in = new Date(b);
+                            var c = urlParams.get('chk_out');
+                            var chk_out = new Date(c);
+
+
+
+                            let ye1 = new Intl.DateTimeFormat('en', { year: '2-digit' }).format(chk_in);
+                            let mo1 = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(chk_in);
+                            let da1 = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(chk_in);
+
+
+                            let ye2 = new Intl.DateTimeFormat('en', { year: '2-digit' }).format(chk_out);
+                            let mo2 = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(chk_out);
+                            let da2 = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(chk_out);
+
+
+                            window.location.href = "BookingInfo.html?roomID=" + rowSelected.cells[6].innerHTML + "&chk_in=" +`${da1}/${mo1}/${ye1}`  + "&chk_out=" + `${da2}/${mo2}/${ye2}`;
+
+                        }
+                    }
+
+
+                }
+            </script>
+            <script>
+                let doIt = () => {
+                    var urlParams = new URLSearchParams(window.location.search);
+                    //var b = parseInt(value(urlParams.get('rooms')));#
+                    var room = urlParams.get('rooms');
+                     var b = urlParams.get('chk_in');
+                            var chk_in = new Date(b);
+                            var c = urlParams.get('chk_out');
+                            var chk_out = new Date(c);
+
+
+
+                            let ye1 = new Intl.DateTimeFormat('en', { year: '2-digit' }).format(chk_in);
+                            let mo1 = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(chk_in);
+                            let da1 = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(chk_in);
+
+
+                            let ye2 = new Intl.DateTimeFormat('en', { year: '2-digit' }).format(chk_out);
+                            let mo2 = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(chk_out);
+                            let da2 = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(chk_out);
+
+           // window.location.href = "/AvailableRooms.html?chk_in=" + `${da1}/${mo1}/${ye1}` + "&chk_out=" + `${da2}/${mo2}/${ye2}`;
+
+
+
+                    var d = "https://alak.dbsprojects.ie:8080/AvailableRooms?chk_in=" + "`${da1}/${mo1}/${ye1}`" + "&chk_out=" + "`${da2}/${mo2}/${ye2}`"+ "&rooms=" + room;
+
+                    var res = encodeURI(d);
+                    let tab = document.getElementById("tab1");
+                    let rows = tab1.getElementsByTagName('tr');
+                    fetch(res)
+                        .then(response => response.json())
+                        .then(data => data.Results.forEach(  //.slice(0,3)
+                            x => {
+                                let newRow = rows[0].cloneNode(true);
+                                let divs = newRow.getElementsByTagName('td');
+
+                                var img = document.createElement('img');
+                                // get the image url from the input box
+                                img.src = x['imageUrl'];
+                                img.width = 250;
+                                divs[0].appendChild(img);
+
+                                divs[1].innerHTML = x['windowDir'];
+                                divs[2].innerHTML = x['bed'];
+                                divs[3].innerHTML = x['accessory'];
+                                divs[4].innerHTML = x['bookingStatus'];
+                                divs[5].innerHTML = x['rlevel'];
+                                divs[6].innerHTML = x['roomID'];
+                                divs[7].innerHTML = x['price'];
+
+                                // NOW CREATE AN INPUT BOX TYPE BUTTON USING createElement() METHOD.
+                                var button = document.createElement('input');
+
+                                // SET INPUT ATTRIBUTE 'type' AND 'value'.
+                                button.setAttribute('type', 'button');
+                                button.setAttribute('value', '\tBook\t');
+                                button.setAttribute('class', 'btn');
+                                // ADD THE BUTTON's 'onclick' EVENT.
+                                button.setAttribute('onclick', 'SelectRowFunction()');
+
+                                // FINALLY ADD THE NEWLY CREATED TABLE AND BUTTON TO THE BODY.
+                                divs[8].appendChild(button);
+                                tab1.appendChild(newRow);
+                            }
+                        )
+                        );
+
+                }
+            </script>
+
+        </head>
+
+			<body onload="doIt()">
+
+				<div class="header" id="myHeader">
+
+					<div class="navbar" id="mynavbar" style="text-align:left">
+
+						<h1>The Falcon Hotel</h1>
+						<a href="index.html">Home</a>
+						<a href="AboutUs.html" class="active">About Us</a>
+						<a href="ContactUs.html">Contact Us</a>
+
+						<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+							<i class="fa fa-bars"></i>
+						</a>
+					</div>
+				</div>
+				<div class="content">
+					<div id="wrapper">
+
+						<main>
+
+
+
+							<div class="gallery">
+
+								<img class="myImg-2" src="images/image-1.jpg" alt="Room-Price €60" style="width:100%;max-width:206px;  height:200px;">
+
+								<img class="myImg-2" src="images/image-2.jpg" alt="Room-Price €90" style="width:100%;max-width:206px;  height:200px;">
+
+								<img class="myImg-2" src="images/image-3.jpg" alt="Luxury Suit €260" style="width:100%;max-width:206px;  height:200px;">
+								<img class="myImg-2" src="images/image-4.jpg" alt="Luxury Suit €240" style="width:100%;max-width:206px;  height:200px;">
+								<img class="myImg-2" src="images/image-5.jpg" alt="Double-Suit €150" style="width:100%;max-width:215px;  height:200px;">
+							</div>
+
+
+
+							<div class="space"></div>
+							<h3>Available Rooms</h3>
+                           <p><label for="select_sort">Filter by price: </label>
+                              <select id="select_sort" onchange="sortTable()">
+                                  <option value="">--Please choose an option--</option>
+                                  <option value="asc">Low to high</option>
+                                  <option value="desc">High to Low</option>
+                                  <option></option>
+
+                              </select></p>
+                            <div style="overflow-x:auto;">
+                                <table id='tab1'>
+                                    <tr style="background-color: #4CAF50; padding-top: 12px; padding-bottom: 12px; text-align: left;  background-color: #4CAF50; color: white">
+                                        <td></td>
+                                        <td>Faces</td>
+                                        <td>bed</td>
+                                        <td>accessory</td>
+
+                                        <td>bookingStatus</td>
+                                        <td>level</td>
+                                        <td>roomID</td>
+                                        <td>Price(€)</td>
+
+                                        <td></td>
+
+                                    </tr>
+                                </table>
+
+
+                            </div>
+                      
+						</main>
+
+					</div>
+
+
+				</div>
+
+
+				<footer>
+					<!-- Footer Section Begin -->
+					<footer class="footer-section">
+						<div class="container">
+							<div class="footer-text">
+								<div class="row">
+									<div class="col-lg-4">
+										<div class="ft-about">
+											<div class="fa-social">
+												<a href="#"><i class="fa fa-facebook"></i></a>
+												<a href="#"><i class="fa fa-twitter"></i></a>
+												<a href="#"><i class="fa fa-tripadvisor"></i></a>
+												<a href="#"><i class="fa fa-instagram"></i></a>
+												<a href="#"><i class="fa fa-youtube-play"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3 offset-lg-1">
+										<div class="ft-contact">
+											<h6>Contact Us</h6>
+											<ul>
+												<li>(353) 91 724166</li>
+												<li>info.falconhotel@gmail.com</li>
+												<li>Rahon Road 52 Rosan Glas, Galway, Ireland</li>
+											</ul>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</footer>
+					<!-- Footer Section End -->
+
+
+				</footer>
+
+				
+
+				<!--sticky header-->
+				<script>
+					window.onscroll = function () { myFunctionToggleMenu() };
+
+					var header = document.getElementById("myHeader");
+					var sticky = header.offsetTop;
+
+					function myFunctionToggleMenu() {
+						if (window.pageYOffset > sticky) {
+							header.classList.add("sticky");
+						} else {
+							header.classList.remove("sticky");
+						}
+					}
+				</script>
+
+
+
+
+				
+
+				<script>
+					// Get the modal
+					var modal = document.getElementById('myModal');
+
+					// Get the image and insert it inside the modal - use its "alt" text as a caption
+					var img = $('.myImg-2');
+					var modalImg = $("#img01");
+					var captionText = document.getElementById("caption");
+					$('.myImg-2').click(function () {
+						modal.style.display = "block";
+						var newSrc = this.src;
+						modalImg.attr('src', newSrc);
+						captionText.innerHTML = this.alt;
+					});
+
+					// Get the <span> element that closes the modal
+					var span = document.getElementsByClassName("close")[0];
+
+					// When the user clicks on <span> (x), close the modal
+					span.onclick = function () {
+						modal.style.display = "none";
+					}
+				</script>
+
+				<script>
+					function myFunction() {
+						var nav = document.getElementById("mynavbar");
+						if (nav.className === "navbar") {
+							nav.className += " responsive";
+						} else {
+							nav.className = "navbar";
+						}
+					}
+				</script>
+			</body>
+</html>
