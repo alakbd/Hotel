@@ -162,7 +162,7 @@ def bookingEntryV():
 def PrintBookingDetails():
   custID = request.args.get('custID')
   cur = mysql.connection.cursor()  #create a connection to the SQL instance
-  cur.execute("select * from reservationTbl where a.custID="+custID+";") # execute an SQL statment
+  cur.execute("select * from reservationTbl where custID="+custID+";") # execute an SQL statment
   rv = cur.fetchall() #Retreive all rows returend by the SQL statment
   Results=[]
   for row in rv: #Format the Output Results and add to return string////////windowDir, bed,accessory,imageUrl,bookingStatus, rlevel
