@@ -172,7 +172,7 @@ def PrintBookingDetails():
     Result['custID']=row[2]
     Result['roomID']=row[3]
     Result['revID']=row[4]
-    Result.append(Result)
+    Results.append(Result)
   response={'Results':Results, 'count':len(Results)}
   ret=app.response_class(
     response=json.dumps(response),
