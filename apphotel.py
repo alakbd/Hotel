@@ -148,7 +148,7 @@ def bookingEntryV():
   s3='''insert into reservationTbl ( checkin_date, checkout_date, custID, roomID ) VALUES('{}','{}','{}','{}');'''.format(checkin_date, checkout_date, Result, roomID)
   cur3.execute(s3)
   mysql.connection.commit()
-  return '{"Result":"Success"}'
+  return '{"Result":Result}'
 
 
 
