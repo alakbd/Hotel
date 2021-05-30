@@ -150,7 +150,7 @@ def bookingEntryV():
   mysql.connection.commit()
   
   
-  response={'Results':Result, 'count':1}
+  response={Result}
   ret=app.response_class(
     response=json.dumps(response),
     status=200,
